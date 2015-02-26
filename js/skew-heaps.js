@@ -81,7 +81,12 @@ function good(tree){
 
 function credits(tree){
     if (tree === null) return 0;
-    return credits(tree(left)) + credits(tree(right)) + if (good(tree)) 0 else 1;
+    if(good(tree)){
+        var h = 0;
+    } else {
+        var h = 1;
+    }
+    return credits(tree(left)) + credits(tree(right)) + h;
 }
 
 

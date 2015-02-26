@@ -104,12 +104,6 @@ describe("a skew heap", function () {
 	  var res = makeWhitPattern(arr1, arr2);
 	  expect(balanced(res)).to.be.true;
 	});	  
-    
-	it('trying credits', function() {
-	  var arr = [59, 21, 23, 26];
-	  var res = make(arr);
-	  expect(balanced(res)).to.be.true;
-	});
 	  
   })  
 });
