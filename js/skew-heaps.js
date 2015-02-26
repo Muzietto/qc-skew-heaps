@@ -89,7 +89,14 @@ function credits(tree){
     return credits(tree(left)) + credits(tree(right)) + h;
 }
 
+function model(tree){
+    flatten(tree).sort();
+}
 
+function flatten(tree){
+    if (tree === null) return [];
+    return tree(label).concat(flatten(tree(left)), flatten(tree(right)));
+}
 
 
 
