@@ -1,0 +1,62 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <title>JSC skew heaps</title>
+        <link rel="stylesheet" type="text/css" href="js/lib/mocha.css">
+
+        <script type="text/javascript" src="js/lib/jscheck.js"></script>
+        <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.js"></script>
+        <script type="text/javascript" src="http://jtemplates.tpython.com/jTemplates/jquery-jtemplates.js"></script>
+
+        <script type="text/javascript">
+        
+          $(document).ready(function() {
+
+            // paints the view as pure html
+            var _render = function ($anchor, $template, data) {
+                var template = $template.text() ? $template.text() : $template.html()
+                ;
+                $anchor.setTemplate(template);  // .text() won't work on IE!!!'
+                $anchor.processTemplate(data);
+            };
+            
+            _render($('#jTemplates'),$('#sampleTemplate'),
+            {
+                id: _.uniqueId('context_'),
+                test_runs: [
+                  { id: 123, value: "test1" },
+                  { id: 13223, value: "test12" },
+                  { id: 1243, value: "test13" },
+                  { id: 1233, value: "test14" },
+                  { id: 1223, value: "test15" },
+                  { id: 1623, value: "test16" },
+                ]
+            });
+          });
+        </script>
+    </head>
+    <body>
+        <h1 style="margin-left:20px;">JSC skew heaps test</h1>
+        
+        
+        <div id="jTemplates"></div>
+        
+        <script type="text/html" id="sampleTemplate">
+          <div class="template">
+            <table>
+              <tr><td>id</td><td>result</td></tr>
+            {#foreach $T.test_runs as test_run}
+              <tr>
+                <td>{$T.test_run.id}</td>
+                <td>{$T.test_run.value}</td>
+              </tr>    
+            {#/for}
+            </table>
+          </div>
+        </script>
+    </body>
+</html>
+ 
