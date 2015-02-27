@@ -104,6 +104,18 @@ describe("a skew heap", function () {
 	  expect(balanced(res)).to.be.true;
 	});	  
 	  
-  })  
+  })
+  
+  describe("model", function (){
+    it('converts a tree to a list', function() {
+        var res = fork(1, fork(2, leaf(4), leaf(5)), fork(3, leaf(6), leaf(7)));
+        expect(model(res)).to.be.eql([1, 2, 3, 4, 5, 6, 7]);
+    }); 
+	context('when the tree is null', function(){
+        it('returns an empty list', function() {
+            expect(model(null)).to.be.eql([]);
+        });        
+    });
+    })  
 });
 
