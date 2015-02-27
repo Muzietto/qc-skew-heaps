@@ -10,8 +10,9 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.js"></script>
         <script type="text/javascript" src="http://jtemplates.tpython.com/jTemplates/jquery-jtemplates.js"></script>
-
-        <script type="text/javascript">
+        <script type="text/javascript" src="js/skew-heaps.js"></script>
+        <script type="text/javascript" src="js/skew-heaps_jscheck.js"></script>
+        <!--<script type="text/javascript">
         
           $(document).ready(function() {
 
@@ -36,7 +37,7 @@
                 ]
             });
           });
-        </script>
+        </script>-->
     </head>
     <body>
         <h1 style="margin-left:20px;">JSC skew heaps test</h1>
@@ -47,7 +48,7 @@
         <script type="text/html" id="sampleTemplate">
           <div class="template">
             <table>
-              <tr><td>id</td><td>result</td></tr>
+              <!--<tr><td>id</td><td>result</td></tr>-->
             {#foreach $T.test_runs as test_run}
               <tr>
                 <td>{$T.test_run.id}</td>

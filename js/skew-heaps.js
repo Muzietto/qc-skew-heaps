@@ -13,6 +13,10 @@ function insert(x,tree) {
   return fork(Math.min(x,tree(label)),tree(right),insert(Math.max(x,tree(label)),tree(left)));
 }
 
+function leaf(x){
+    return fork(x, null, null);
+}
+
 function make(array){
   if (array.length === 0) return null;
   return array.reduce(function(acc,curr){
@@ -90,12 +94,12 @@ function credits(tree){
 }
 
 function model(tree){
-    flatten(tree).sort();
+    return flatten(tree).sort();
 }
 
 function flatten(tree){
     if (tree === null) return [];
-    return tree(label).concat(flatten(tree(left)), flatten(tree(right)));
+    return [tree(label)].concat(flatten(tree(left)), flatten(tree(right)));
 }
 
 
