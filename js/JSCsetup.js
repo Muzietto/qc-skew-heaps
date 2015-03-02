@@ -1,5 +1,5 @@
-var KNAPSACK = {};
-KNAPSACK.acc = [];
+var TEMPLATE = {};
+TEMPLATE.acc = [];
 var index = 0;
 var actualName;
 
@@ -9,8 +9,8 @@ function isnSet(value) {
 
 JSC.on_pass(function(obj) {
   if(isnSet(actualName)) {actualName = obj.name;}
-  if(obj.name === actualName && index >= KNAPSACK.acc.length) {
-    KNAPSACK.acc.push({
+  if(obj.name === actualName && index >= TEMPLATE.acc.length) {
+    TEMPLATE.acc.push({
       name: obj.name,
       errorMessages: [],
       errorInputs: [],
@@ -19,11 +19,11 @@ JSC.on_pass(function(obj) {
       fail: 0
     });  
   } else if(obj.name === actualName) {
-    KNAPSACK.acc[index].pass++;
+    TEMPLATE.acc[index].pass++;
   } else {
     actualName = obj.name;
     index++;
-    KNAPSACK.acc.push({
+    TEMPLATE.acc.push({
       name: obj.name,
       errorMessages: [],
       errorInputs: [],
@@ -36,8 +36,8 @@ JSC.on_pass(function(obj) {
 
 JSC.on_fail(function(obj) {
   if(isnSet(actualName)) {actualName = obj.name;}
-  if(obj.name === actualName && index >= KNAPSACK.acc.length) {
-    KNAPSACK.acc.push({
+  if(obj.name === actualName && index >= TEMPLATE.acc.length) {
+    TEMPLATE.acc.push({
       name: obj.name,
       errorMessages: [],
       errorInputs: [{serial: obj.serial, input: obj.args}],
@@ -46,12 +46,12 @@ JSC.on_fail(function(obj) {
       fail: 1
     });  
   } else if(obj.name === actualName){
-    KNAPSACK.acc[index].fail++;
-    KNAPSACK.acc[index].errorInputs.push({serial: obj.serial, input: obj.args});
+    TEMPLATE.acc[index].fail++;
+    TEMPLATE.acc[index].errorInputs.push({serial: obj.serial, input: obj.args});
   } else {
     actualName = obj.name;
     index++;
-    KNAPSACK.acc.push({
+    TEMPLATE.acc.push({
       name: obj.name,
       errorMessages: [],
       errorInputs: [{serial: obj.serial, input: obj.args}],
@@ -64,8 +64,8 @@ JSC.on_fail(function(obj) {
 
 JSC.on_lost(function(obj) {
   if(isnSet(actualName)) {actualName = obj.name;}
-  if(obj.name === actualName && index >= KNAPSACK.acc.length) {
-    KNAPSACK.acc.push({
+  if(obj.name === actualName && index >= TEMPLATE.acc.length) {
+    TEMPLATE.acc.push({
       name: obj.name,
       errorMessages: [{serial: obj.serial, msg: obj.exception.message}],
       errorInputs: [],
@@ -74,12 +74,12 @@ JSC.on_lost(function(obj) {
       fail: 0
     });  
   } else if(obj.name === actualName && set === true) {
-    KNAPSACK.acc[index].lost++;
-    KNAPSACK.acc[index].errorMessages.push({serial: obj.serial, msg: obj.exception.message});
+    TEMPLATE.acc[index].lost++;
+    TEMPLATE.acc[index].errorMessages.push({serial: obj.serial, msg: obj.exception.message});
   } else {
     actualName = obj.name;
     index++;
-    KNAPSACK.acc.push({
+    TEMPLATE.acc.push({
       name: obj.name,
       errorMessages: [{serial: obj.serial, msg: obj.exception.message}],
       errorInputs: [],
@@ -97,5 +97,5 @@ JSC.on_result(function(obj) {
     $anchor.setTemplate(template);  // .text() won't work on IE!!!'
     $anchor.processTemplate(data);
   };
-  _render($('#jTemplates'),$('#sampleTemplate'),KNAPSACK);
+  _render($('#jTemplates'),$('#sampleTemplate'),TEMPLATE);
 });
