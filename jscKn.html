@@ -10,6 +10,7 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.js"></script>
         <script type="text/javascript" src="http://jtemplates.tpython.com/jTemplates/jquery-jtemplates.js"></script>
+        <script type="text/javascript" src="js/JSCsetup.js"></script>
         <script type="text/javascript" src="js/knapsack-problem.js"></script>
         <script type="text/javascript" src="js/knapsack-problem-test.js"></script>
 
@@ -53,7 +54,7 @@
                 <td style="width:10%">Lost</td>
               </tr>
               {#foreach $T.acc as case}
-              <tr>
+              <tr {#if $T.case.fail > 0} style="background-color:red;" {#else} style="background-color:green;" {#/if}>
                 <td>{$T.case.name}</td>
                 <td>{$T.case.pass}</td>
                 <td>{$T.case.fail}</td>
