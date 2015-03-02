@@ -65,13 +65,32 @@
               <tr class="int">
                 <td>Test name</td>
                 <td>Serial</td>
-                <td>ErrorMsg</td>
+                <td>LostMsg</td>
               </tr>
-              {#foreach $T.errorMessages as error}
-              <tr>
-                <td>{$T.error.serial}</td>
-                <td>{$T.error.msg}</td>
+              {#foreach $T.acc as case}
+                {#foreach $T.case.errorMessages as error}
+                <tr>
+                  <td>{$T.case.name}</td>
+                  <td>{$T.error.serial}</td>
+                  <td>{$T.error.msg}</td>
+                </tr>
+                {#/for}
+            {#/for}
+            </table>
+            <table class="err">
+              <tr class="int">
+                <td>Test name</td>
+                <td>Serial</td>
+                <td>ErrorInput</td>
               </tr>
+              {#foreach $T.acc as case}
+                {#foreach $T.case.errorMessages as error}
+                <tr>
+                  <td>{$T.case.name}</td>
+                  <td>{$T.error.serial}</td>
+                  <td>{$T.error.msg}</td>
+                </tr>
+                {#/for}
             {#/for}
             </table>
           </div>

@@ -69,7 +69,7 @@ JSC.on_lost(function(obj) {
   if(typeof actualName === 'undefined') {actualName = obj.name;}
   if(obj.name === actualName && set === true){
     KNAPSACK.acc[index].lost++;
-    KNAPSACK.acc[index].errorMessage.push({serial: obj.serial, msg: obj.exception.message});
+    KNAPSACK.acc[index].errorMessages.push({serial: obj.serial, msg: obj.exception.message});
   } else if(obj.name === actualName && set === false){
     KNAPSACK.acc.push({
       name: obj.name,
@@ -123,5 +123,5 @@ JSC.claim('test cost of the solution is less then budget', testBudget, [JSC.arra
 
 JSC.reps(100);
 $(document).ready(function(){
-JSC.check(1000);
+  JSC.check(1000);
 });
