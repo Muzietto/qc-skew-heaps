@@ -12,32 +12,30 @@
         <script type="text/javascript" src="http://jtemplates.tpython.com/jTemplates/jquery-jtemplates.js"></script>
         <script type="text/javascript" src="js/skew-heaps.js"></script>
         <script type="text/javascript" src="js/skew-heaps_jscheck.js"></script>
-        <!--<script type="text/javascript">
-        
-          $(document).ready(function() {
 
-            // paints the view as pure html
-            var _render = function ($anchor, $template, data) {
-                var template = $template.text() ? $template.text() : $template.html()
-                ;
-                $anchor.setTemplate(template);  // .text() won't work on IE!!!'
-                $anchor.processTemplate(data);
-            };
-            
-            _render($('#jTemplates'),$('#sampleTemplate'),
-            {
-                id: _.uniqueId('context_'),
-                test_runs: [
-                  { id: 123, value: "test1" },
-                  { id: 13223, value: "test12" },
-                  { id: 1243, value: "test13" },
-                  { id: 1233, value: "test14" },
-                  { id: 1223, value: "test15" },
-                  { id: 1623, value: "test16" },
-                ]
-            });
-          });
-        </script>-->
+        <style>
+          #jTemplates {
+            width:500px;
+            margin:0 auto;
+            background-color:#EEEEEE;
+            min-height:800px;
+          }
+          table{
+            width: 100%;
+            border:1px solid #000;
+            border-collapse: collapse;
+          }
+          .err{
+            margin-top: 50px;
+          }
+          td, tr{
+            border:1px solid #000;
+          }
+          .int{
+          font-weight: bold;
+          
+          }
+        </style>
     </head>
     <body>
         <h1 style="margin-left:20px;">JSC skew heaps test</h1>
@@ -48,16 +46,54 @@
         <script type="text/html" id="sampleTemplate">
           <div class="template">
             <table>
-              <!--<tr><td>id</td><td>result</td></tr>-->
-            {#foreach $T.test_runs as test_run}
+              <tr class="int">
+                <td style="width:70%">Test name</td>
+                <td style="width:10%">Pass</td>
+                <td style="width:10%">Fail</td>
+                <td style="width:10%">Lost</td>
+              </tr>
+              {#foreach $T.acc as case}
               <tr>
-                <td>{$T.test_run.id}</td>
-                <td>{$T.test_run.value}</td>
-              </tr>    
+                <td>{$T.case.name}</td>
+                <td>{$T.case.pass}</td>
+                <td>{$T.case.fail}</td>
+                <td>{$T.case.lost}</td>
+              </tr>
+              {#/for}
+            </table>
+            <table class="err">
+              <tr class="int">
+                <td style="width:45%">Test name</td>
+                <td style="width:10%">Serial</td>
+                <td style="width:45%">LostMsg</td>
+              </tr>
+              {#foreach $T.acc as case}
+                {#foreach $T.case.errorMessages as error}
+                <tr>
+                  <td>{$T.case.name}</td>
+                  <td>{$T.error.serial}</td>
+                  <td>{$T.error.msg}</td>
+                </tr>
+                {#/for}
+            {#/for}
+            </table>
+            <table class="err">
+              <tr class="int">
+                <td style="width:45%">Test name</td>
+                <td style="width:10%">Serial</td>
+                <td style="width:45%">ErrorInput</td>
+              </tr>
+              {#foreach $T.acc as case}
+                {#foreach $T.case.errorInputs as wrong}
+                <tr>
+                  <td>{$T.case.name}</td>
+                  <td>{$T.wrong.serial}</td>
+                  <td>{$T.wrong.input}</td>
+                </tr>
+                {#/for}
             {#/for}
             </table>
           </div>
         </script>
     </body>
-</html>
- 
+</html> 

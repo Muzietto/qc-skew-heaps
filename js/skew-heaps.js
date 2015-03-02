@@ -80,6 +80,7 @@ function join(tree1, tree2){
 }
 
 function good(tree){
+  if(tree === null) return true;
 	return (weight(tree(left)) <= weight(tree(right)));
 }
 

@@ -32,7 +32,7 @@
             border:1px solid #000;
           }
           .int{
-          font-weight: bold;
+            font-weight: bold;
           
           }
         </style>
@@ -47,10 +47,10 @@
           <div class="template">
             <table>
               <tr class="int">
-                <td>Test name</td>
-                <td>Pass</td>
-                <td>Fail</td>
-                <td>Lost</td>
+                <td style="width:70%">Test name</td>
+                <td style="width:10%">Pass</td>
+                <td style="width:10%">Fail</td>
+                <td style="width:10%">Lost</td>
               </tr>
               {#foreach $T.acc as case}
               <tr>
@@ -63,9 +63,9 @@
             </table>
             <table class="err">
               <tr class="int">
-                <td>Test name</td>
-                <td>Serial</td>
-                <td>LostMsg</td>
+                <td style="width:45%">Test name</td>
+                <td style="width:10%">Serial</td>
+                <td style="width:45%">LostMsg</td>
               </tr>
               {#foreach $T.acc as case}
                 {#foreach $T.case.errorMessages as error}
@@ -79,9 +79,9 @@
             </table>
             <table class="err">
               <tr class="int">
-                <td>Test name</td>
-                <td>Serial</td>
-                <td>ErrorInput</td>
+                <td style="width:45%">Test name</td>
+                <td style="width:10%">Serial</td>
+                <td style="width:45%">ErrorInput</td>
               </tr>
               {#foreach $T.acc as case}
                 {#foreach $T.case.errorInputs as wrong}
