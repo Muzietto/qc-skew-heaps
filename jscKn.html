@@ -84,11 +84,11 @@
                 <td>ErrorInput</td>
               </tr>
               {#foreach $T.acc as case}
-                {#foreach $T.case.errorMessages as error}
+                {#foreach $T.case.errorInputs as wrong}
                 <tr>
                   <td>{$T.case.name}</td>
-                  <td>{$T.error.serial}</td>
-                  <td>{$T.error.msg}</td>
+                  <td>{$T.wrong.serial}</td>
+                  <td>{$T.wrong.input}</td>
                 </tr>
                 {#/for}
             {#/for}

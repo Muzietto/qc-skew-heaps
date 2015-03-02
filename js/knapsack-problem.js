@@ -19,7 +19,7 @@ var combinations = function(a) {
   return all;
 }
 
-function findCandidate(acc, candidate){
+function findCandidate(acc, candidate) {
   if(rate(candidate) > rate(acc) || ((rate(candidate) === rate(acc)) && (cost(candidate) < cost(acc)))){
     return candidate;
   } else{ 
@@ -27,39 +27,46 @@ function findCandidate(acc, candidate){
   }
 }
 
-function cost(solution){
+function cost(solution) {
   return _.reduce(solution, function(c, t) {return c + t.cost;}, 0);
 }
 
-function rate(solution){
+function rate(solution) {
   return _.reduce(solution, function(r, t) {return r + t.rate;}, 0);
 }
 
-function knapsackBruteforce(things, budget){
+function knapsackBruteforce(things, budget) {
   var solutions =  combinations(things);
   var validSolutions = _.filter(solutions, function(solution) {return cost(solution) <= budget;});
   return _.reduce(validSolutions, findCandidate, []);
 }
 
-function sortPerRelative(things){
-  var sorted;
+function sortPerRelative(things) {
+  var sorted = [];
   _.map(things, function(object) {
-    sorted.push.apply(sorted, {rel: object.cost/object.rate, obj: object})
+    sorted.push({rel: object.rate/object.cost, obj: object})
   });
   return sorted.sort(function(a, b) {
     return b.rel - a.rel;
   });
 }
-/*
-function knapsackGreedy(things, budget){
-  var sorted, res;
+
+function knapsackGreedy(things, budget) {
+  var sorted = [];
+  var res = [];
+  things = things.sort(function(a, b) {
+    return b.rate - a.rate;
+  })
   sorted = sortPerRelative(things);
   sorted.forEach(function(element, index, array) {
-    
-    res.push.apply(res, )
+    if(element.obj.cost <= budget){
+      res.push(element.obj);
+      budget -= element.obj.cost; 
+    }
   });
+  return res;
 }
-*/
+
 
 var things = [
   {rate: 4, cost: 12},
@@ -69,4 +76,4 @@ var things = [
   {rate: 10, cost: 4}
 ]
 
-//console.log(knapsackBruteforce(things, 15))
+//console.log(knapsackGreedy(things, 15))
