@@ -22,7 +22,6 @@ Array.prototype.equals = function (array) {
 
 var KNAPSACK = {};
 KNAPSACK.acc = [];
-var set = false;
 var index = 0;
 var actualName;
 
@@ -32,9 +31,7 @@ function isnSet(value) {
 
 JSC.on_pass(function(obj) {
   if(isnSet(actualName)) {actualName = obj.name;}
-  if(obj.name === actualName && set === true){
-    KNAPSACK.acc[index].pass++;
-  } else if(obj.name === actualName && set === false){
+  if(obj.name === actualName && index >= KNAPSACK.acc.length) {
     KNAPSACK.acc.push({
       name: obj.name,
       errorMessages: [],
@@ -43,7 +40,8 @@ JSC.on_pass(function(obj) {
       lost: 0,
       fail: 0
     });  
-    set = true;
+  } else if(obj.name === actualName) {
+    KNAPSACK.acc[index].pass++;
   } else {
     actualName = obj.name;
     index++;
@@ -55,16 +53,12 @@ JSC.on_pass(function(obj) {
       lost: 0,
       fail: 0
     }); 
-    set = true;
   }
 });
 
 JSC.on_fail(function(obj) {
   if(isnSet(actualName)) {actualName = obj.name;}
-  if(obj.name === actualName && set === true){
-    KNAPSACK.acc[index].fail++;
-    KNAPSACK.acc[index].errorInputs.push({serial: obj.serial, input: obj.args});
-  } else if(obj.name === actualName && set === false){
+  if(obj.name === actualName && index >= KNAPSACK.acc.length) {
     KNAPSACK.acc.push({
       name: obj.name,
       errorMessages: [],
@@ -73,7 +67,9 @@ JSC.on_fail(function(obj) {
       lost: 0,
       fail: 1
     });  
-    set = true;
+  } else if(obj.name === actualName){
+    KNAPSACK.acc[index].fail++;
+    KNAPSACK.acc[index].errorInputs.push({serial: obj.serial, input: obj.args});
   } else {
     actualName = obj.name;
     index++;
@@ -85,16 +81,12 @@ JSC.on_fail(function(obj) {
       lost: 0,
       fail: 1
     }); 
-    set = true;
   }
 });
 
 JSC.on_lost(function(obj) {
   if(isnSet(actualName)) {actualName = obj.name;}
-  if(obj.name === actualName && set === true){
-    KNAPSACK.acc[index].lost++;
-    KNAPSACK.acc[index].errorMessages.push({serial: obj.serial, msg: obj.exception.message});
-  } else if(obj.name === actualName && set === false){
+  if(obj.name === actualName && index >= KNAPSACK.acc.length) {
     KNAPSACK.acc.push({
       name: obj.name,
       errorMessages: [{serial: obj.serial, msg: obj.exception.message}],
@@ -103,7 +95,9 @@ JSC.on_lost(function(obj) {
       lost: 1,
       fail: 0
     });  
-    set = true;
+  } else if(obj.name === actualName && set === true) {
+    KNAPSACK.acc[index].lost++;
+    KNAPSACK.acc[index].errorMessages.push({serial: obj.serial, msg: obj.exception.message});
   } else {
     actualName = obj.name;
     index++;
@@ -115,7 +109,6 @@ JSC.on_lost(function(obj) {
       lost: 1,
       fail: 0
     }); 
-    set = true;
   }
 }); 
 
