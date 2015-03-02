@@ -1,0 +1,81 @@
+﻿ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <title>JSC Knapsack problem</title>
+        <link rel="stylesheet" type="text/css" href="js/lib/mocha.css">
+
+        <script type="text/javascript" src="js/lib/jscheck.js"></script>
+        <script type="text/javascript" src="js/lib/underscore-min.js"></script>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.js"></script>
+        <script type="text/javascript" src="http://jtemplates.tpython.com/jTemplates/jquery-jtemplates.js"></script>
+        <script type="text/javascript" src="js/knapsack-problem.js"></script>
+        <script type="text/javascript" src="js/knapsack-problem-test.js"></script>
+
+        <style>
+          #jTemplates {
+            width:500px;
+            margin:0 auto;
+            background-color:#EEEEEE;
+            min-height:800px;
+          }
+          table{
+            width: 100%;
+            border:1px solid #000;
+            border-collapse: collapse;
+          }
+          .err{
+            margin-top: 50px;
+          }
+          td, tr{
+            border:1px solid #000;
+          }
+          .int{
+          font-weight: bold;
+          
+          }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin-left:20px;">JSC Knapsack problem test</h1>
+        
+        
+        <div id="jTemplates"></div>
+        
+        <script type="text/html" id="sampleTemplate">
+          <div class="template">
+            <table>
+              <tr class="int">
+                <td>Test name</td>
+                <td>Pass</td>
+                <td>Fail</td>
+                <td>Lost</td>
+              </tr>
+              {#foreach $T.acc as case}
+              <tr>
+                <td>{$T.case.name}</td>
+                <td>{$T.case.pass}</td>
+                <td>{$T.case.fail}</td>
+                <td>{$T.case.lost}</td>
+              </tr>
+              {#/for}
+            </table>
+            <table class="err">
+              <tr class="int">
+                <td>Test name</td>
+                <td>Serial</td>
+                <td>ErrorMsg</td>
+              </tr>
+              {#foreach $T.errorMessages as error}
+              <tr>
+                <td>{$T.error.serial}</td>
+                <td>{$T.error.msg}</td>
+              </tr>
+            {#/for}
+            </table>
+          </div>
+        </script>
+    </body>
+</html>
+ 

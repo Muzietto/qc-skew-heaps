@@ -41,6 +41,26 @@ function knapsackBruteforce(things, budget){
   return _.reduce(validSolutions, findCandidate, []);
 }
 
+function sortPerRelative(things){
+  var sorted;
+  _.map(things, function(object) {
+    sorted.push.apply(sorted, {rel: object.cost/object.rate, obj: object})
+  });
+  return sorted.sort(function(a, b) {
+    return b.rel - a.rel;
+  });
+}
+/*
+function knapsackGreedy(things, budget){
+  var sorted, res;
+  sorted = sortPerRelative(things);
+  sorted.forEach(function(element, index, array) {
+    
+    res.push.apply(res, )
+  });
+}
+*/
+
 var things = [
   {rate: 4, cost: 12},
   {rate: 2, cost: 2},
