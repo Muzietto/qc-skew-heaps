@@ -149,19 +149,10 @@ function MONAD(modifier) {
 // In some mythologies 'bind' is called 'pipe' or '>>='.
 // The bind method will deliver the unit's value parameter to a function.
 
-        monad.bind = function (func, args) {
+// AAA - this version of bind is simplified compared to Doug's original!!!
 
-// bind takes a function and an optional array of arguments. It calls that
-// function passing the monad's value and bind's optional array of args.
-
-// With ES6, this horrible return statement can be replaced with
-
-//          return func(value, ...args);
-
-            return func.apply(
-                undefined,
-                [value].concat(Array.prototype.slice.apply(args || []))
-            );
+        monad.bind = function (func) {
+            return func(value);
         };
 
 // If MONAD's modifier parameter is a function, then call it, passing the monad
