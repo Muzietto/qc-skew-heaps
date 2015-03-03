@@ -1,14 +1,15 @@
-
+// ASYNC stuff
 var gett = function(url){
-    console.log('invoking ' + url);
-    return $.getJSON(url, function (data) {
-        console.log('URL: ' + url + '; SUCCESS: ' + JSON.stringify(data));
-        data.filippo = 12;
-        return data;
-    })
-    .fail(function(error){console.log('FAIL: ' + error)});
+  console.log('invoking ' + url);
+  return $.getJSON(url, function (data) {
+      console.log('URL: ' + url + '; SUCCESS: ' + JSON.stringify(data));
+      data.filippo = 12;
+      return data;
+  })
+  .fail(function(error){console.log('FAIL: ' + error)});
 }
 
+// SYNC stuff
 var getUrlFromData = function(v){
   var url = v.data.url;
   console.log('invoking ' + url);
@@ -92,17 +93,28 @@ $(document).ready(function(){
     .getUrl() // gets second.json
     .getUrl() // gets third.json
   ;
-  
-//debugger;
   alert(result10.value().acc);    
-  
-  
+
+  // promises --> callback hell
+  var resultXXX = gett('remote/first.json')
+    .then(function(data){
+      console.log('data is now' + JSON.stringify(data));
+      gett(data.url)
+      .then(function(data){
+        console.log('data is now' + JSON.stringify(data));
+        gett(data.url)
+        .then(function(data){alert(data.value)});
+      })
+    });
+});
+
 /*
 $.ajax({
       url: 'remote/first.json',
       dataType: 'json',
       type: 'GET',
       cache: true,
+      //async: false,
       contentType: 'application/json',
       success: function (data, textStatus) {
         console.log("RECV: " + data);
@@ -112,19 +124,3 @@ $.ajax({
       error: function(error){console.log('ERR: ' + error)}
     })
 */
-
-
-/* this bugger works
-  var resultXXX = gett('remote/first.json')
-                  .then(function(data){
-                    console.log('data is now' + JSON.stringify(data));
-                    gett(data.url)
-                    .then(function(data){
-                      console.log('data is now' + JSON.stringify(data));
-                      gett(data.url)
-                    })
-                  });
-
-
-*/
-});
