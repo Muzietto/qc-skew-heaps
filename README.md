@@ -3,7 +3,7 @@ QuickChecking skew heaps and some quickChecking on the knapsack problem. See [1]
 
 Doubleclick on jsc.html for skew heaps and on jscKn.html for knapsacks.
 
-All ajax-related page require a webserver serving files from the filesystem. See [3].
+All ajax-related page require a webserver running in local. See [3].
 
 [1] http://people.inf.elte.hu/center/fulltext.pdf
 
