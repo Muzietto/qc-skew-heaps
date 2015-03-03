@@ -23,14 +23,35 @@ var getUrl = function(){
   }
 }
 
-$(document).ready(function(){
+var gett = function(url){
+    console.log('invoking ' + url);
+    return $.getJSON(url, function (data) {
+        console.log('URL: ' + url + '; SUCCESS: ' + JSON.stringify(data));
+        data.filippo = 12;
+        return data;
+    })
+    .fail(function(error){console.log('FAIL: ' + error)});
+}
 
+$(document).ready(function(){
+/*
   var result0 = ajax({ acc: '', data: {}});
 
   var result1 = result0
     .bind(get('remote/first.json'));
-    
-  
+*/
+
+  var result0 = gett('remote/first.json')
+                  .then(function(data){
+                    console.log('data is now' + JSON.stringify(data));
+                    gett(data.url)
+                    .then(function(data){
+                      console.log('data is now' + JSON.stringify(data));
+                      gett(data.url)
+                    })
+                  });
+
+
 /*
   var result2 = result1
     .getUrl(); // gets second.json

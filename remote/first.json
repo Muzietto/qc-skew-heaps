@@ -1,1 +1,1 @@
-"{ name: 'first', url: 'second.json' }"
+{ "name": "first", "url": "remote/second.json" }
