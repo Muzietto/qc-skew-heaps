@@ -89,7 +89,12 @@
                 <tr>
                   <td>{$T.case.name}</td>
                   <td>{$T.wrong.serial}</td>
-                  <td>{$T.wrong.input}</td>
+                  <td>
+                    {#foreach $T.wrong.input[0] as obj}
+                      (Rate: {$T.obj.rate} Cost: {$T.obj.cost})</br>
+                    {#/for}
+                    Budget: {$T.wrong.input[1]}
+                  </td>
                 </tr>
                 {#/for}
             {#/for}
@@ -98,4 +103,49 @@
         </script>
     </body>
 </html>
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'{Rate: ' + this.rate + ' Cost: ' + this.cost + '}</br>'

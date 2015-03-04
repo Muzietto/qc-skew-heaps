@@ -1,2 +1,1 @@
-- implementare greedy
-- testare greedy
+-far stampare i valori degli oggetti
