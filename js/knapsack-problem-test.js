@@ -20,20 +20,22 @@ Array.prototype.equals = function (array) {
   return true;
 }   
 
+var testObj = {rate: JSC.integer(20), cost: JSC.integer(10)};
+
 function testSubset(verdict, things, budget) {
   var res = knapsackBruteforce(things, budget);
   var union = _.union(things, res);
   return verdict(_.difference(things, union).length === 0);
 }
 
-JSC.claim('test output is subset of input', testSubset, [JSC.array(10, JSC.object({rate: JSC.integer(20), cost: JSC.integer(10)})), JSC.integer(30)]);
+JSC.claim('test output is subset of input', testSubset, [JSC.array(10, JSC.object(testObj)), JSC.integer(30)]);
 
 function testBudget(verdict, things, budget) {
   var res = knapsackBruteforce(things, budget);
   return verdict(cost(res) <= budget);
 }
 
-JSC.claim('test cost of the solution is less then budget', testBudget, [JSC.array(10, JSC.object({rate: JSC.integer(20), cost: JSC.integer(10)})), JSC.integer(30)]);
+JSC.claim('test cost of the solution is less then budget', testBudget, [JSC.array(10, JSC.object(testObj)), JSC.integer(30)]);
 
 function testGreedy(verdict, things, budget) {
   var greedy = knapsackGreedy(things, budget);
@@ -42,7 +44,7 @@ function testGreedy(verdict, things, budget) {
 }
 
 JSC.claim('test that the greedy solution return the same result of the brute force solution', 
-  testGreedy, [JSC.array(10, JSC.object({rate: JSC.integer(20), cost: JSC.integer(10)})), JSC.integer(30)]);
+  testGreedy, [JSC.array(10, JSC.object(testObj)), JSC.integer(30)]);
 
 JSC.reps(100);
 $(document).ready(function() {
