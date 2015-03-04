@@ -26,7 +26,7 @@ var getUrlFromData = function(v){
     },
     error: function(error){console.log('ERR: ' + error)}
   })
-  return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult });
+  return { acc: v.acc + ' --> ' + url, data: jsonResult, jump: v.jump + 1 };
 }
 
 var ajax = MONAD()
@@ -53,7 +53,7 @@ var get = function(url){
       },
       error: function(error){console.log('ERR: ' + error)}
     })
-    return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult });
+    return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult, jump: v.jump + 1 });
   }
 }
 
@@ -74,28 +74,41 @@ var getUrlFromChain = function(){
       },
       error: function(error){console.log('ERR: ' + error)}
     })
-    return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult });
+    return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult, jump: v.jump + 1 });
   }
 }
 
+var navigate = function(url){
+  var result = ajax({ acc: 'START', data: {}, jump: 0}).bind(get(url));
+  while('url' in Object.keys(result)){
+    result = result.getUrl();  
+  }
+  return result;
+}
+
+var result3;
+
 $(document).ready(function(){
 
-  var result0 = ajax({ acc: 'START', data: {}});
+  var result0 = ajax({ acc: 'START', data: {}, jump: 0});
 
   var result1 = result0
     .bind(get('remote/first.json'));
 
   var result2 = result1
     .bind(getUrlFromChain());
+    
+  result3 = result2.getUrl();
 
-  var result10 = ajax({ acc: 'START', data: {}})
+  var result10 = ajax({ acc: 'START', data: {}, jump: 0})
     .bind(get('remote/first.json'))
     .getUrl() // gets second.json
     .getUrl() // gets third.json
   ;
-  alert(result10.value().acc);    
-
+  //alert(result10.value().acc);     
+  
   // promises --> callback hell
+  /*
   var resultXXX = gett('remote/first.json')
     .then(function(data){
       console.log('data is now' + JSON.stringify(data));
@@ -106,6 +119,7 @@ $(document).ready(function(){
         .then(function(data){alert(data.value)});
       })
     });
+  */
 });
 
 /*
@@ -124,3 +138,4 @@ $.ajax({
       error: function(error){console.log('ERR: ' + error)}
     })
 */
+
