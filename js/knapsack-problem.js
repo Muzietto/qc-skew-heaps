@@ -67,7 +67,7 @@ function knapsackGreedy(things, budget) {
   return res;
 }
 
-
+/*
 var things = [
   {rate: 4, cost: 12},
   {rate: 2, cost: 2},
@@ -76,4 +76,5 @@ var things = [
   {rate: 10, cost: 4}
 ]
 
-//console.log(knapsackGreedy(things, 15))
+console.log(knapsackGreedy(things, 15))
+*/
