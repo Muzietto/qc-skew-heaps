@@ -103,8 +103,8 @@ $(document).ready(function(){
   var result10 = ajax({ acc: 'START', data: {}, jump: 0})
     .bind(get('remote/first.json'))
     .getUrl() // gets second.json
-    .getUrl() // gets third.json
-  ;
+    .getUrl(); // gets third.json
+
   //alert(result10.value().acc);     
   
   // promises --> callback hell
