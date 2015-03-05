@@ -83,18 +83,46 @@ var navigate = function(url){
   while('url' in Object.keys(result)){
     result = result.getUrl();  
   }
+  console.log('NAVIGATE');
   return result;
 }
 
 var result3;
 
+function pausecomp(millis)
+ {
+  var date = new Date();
+  var curDate = null;
+  do { curDate = new Date(); }
+  while(curDate-date < millis);
+}
+
+function base(url){
+  var result0 = ajax({ acc: 'START', data: {}, jump: 0});
+
+  var result1 = result0
+    .bind(get(url));
+  pausecomp(5000)
+  var result2 = result1
+    .bind(getUrlFromChain());
+    
+  result3 = result2.getUrl();
+  /*
+  var result10 = ajax({ acc: 'START', data: {}, jump: 0})
+    .bind(get('remote/first.json'))
+    .getUrl() // gets second.json
+    .getUrl(); // gets third.json
+  */
+}
+
+/*
 $(document).ready(function(){
 
   var result0 = ajax({ acc: 'START', data: {}, jump: 0});
 
   var result1 = result0
     .bind(get('remote/first.json'));
-
+  pausecomp(5000)
   var result2 = result1
     .bind(getUrlFromChain());
     
@@ -119,8 +147,8 @@ $(document).ready(function(){
         .then(function(data){alert(data.value)});
       })
     });
-  */
-});
+  
+});*/
 
 /*
 $.ajax({
