@@ -1,5 +1,5 @@
 function testThirdValue(verdict){
-  return verdict(base().value().data.value === "third_value");
+  return verdict(baseMonad().value().data.value === "third_value");
 }
 
 function testNavigate(verdict, url){
@@ -14,8 +14,9 @@ JSC.group("asinc");
 JSC.claim('test third value', testThirdValue, []);
 
 $(document).ready(function(){
-  JSC.reps(1);
-  JSC.check(1000); 
+  JSC.reps(3);
+  JSC.check(60*1000); 
+  console.log('--> all predicates called!!');
 });
 
 

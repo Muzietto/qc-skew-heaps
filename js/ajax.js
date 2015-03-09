@@ -44,13 +44,13 @@ var get = function(url){
 var navigate = function(url) {
   var result = ajax({ acc: 'START', data: {}, jump: 0}).bind(get(url));
   while('url' in Object.keys(result)){
-    result = result.getUrl();  
+    result = result.getUrl();
   }
   return result;
 }
 
-function base(){
-  return result = ajax({ acc: 'START', data: {}, jump: 0})
+function baseMonad(){
+  return ajax({ acc: 'START', data: {}, jump: 0})
     .bind(get('remote/first.json'))
     .getUrl() // gets second.json
     .getUrl(); // gets third.json
