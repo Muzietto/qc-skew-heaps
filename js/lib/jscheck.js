@@ -466,20 +466,25 @@ var JSC = (function () {
                         verdict: verdict
                     });
 
+                    setTimeout(function(){
+
 // Call the predicate, giving it the verdict function and all of the case's
 // arguments. The predicate must use the verdict callback to signal the result
 // of the case.
 
-                    try {
-                        return predicate.apply(args, [verdict].concat(args));
+                      try {
+                          return predicate.apply(args, [verdict].concat(args));
 
 // If the predicate throws, then this is a lost case. Use the exception
 // as the verdict, but don't allow the exception to be a boolean, because that
 // would be confusing.
 
-                    } catch (e) {
-                        return verdict(typeof e === 'boolean' ? null : e);
-                    }
+                      } catch (e) {
+                          return verdict(typeof e === 'boolean' ? null : e);
+                      }
+                      
+                    }, 0);
+                    
                 }
                 if (dont !== true) {
 
