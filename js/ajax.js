@@ -15,7 +15,7 @@ var getUrlFromData = function(v){
     },
     error: function(error){console.log('ERR: ' + error)}
   })
-  pauseComp(3000);
+  pauseComp(1000);
   return { acc: v.acc + ' --> ' + url, data: jsonResult, jump: v.jump + 1 };
 }
   
@@ -36,7 +36,7 @@ var get = function(url){
       },
       error: function(error){console.log('ERR: ' + error)}
     })
-    pauseComp(3000);
+    pauseComp(1000);
     return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult, jump: v.jump + 1 });
   }
 }
