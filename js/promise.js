@@ -1,3 +1,10 @@
+function pauseComp(millis) {
+  var date = new Date(), curDate;
+  do { 
+    curDate = new Date(); 
+  } while(curDate-date < millis);
+}
+
 // ASYNC stuff
 var gett = function(url){
   console.log('invoking ' + url);
@@ -106,4 +113,34 @@ $(document).ready(function(){
         .then(function(data){alert(data.value)});
       })
     });
+  console.log("Fine prima");
+    
+  var resultXXX1 = gett('remote/first.json')
+    .then(function(data){
+      console.log('data is now' + JSON.stringify(data));
+      gett(data.url)
+      .then(function(data){
+        console.log('data is now' + JSON.stringify(data));
+        gett(data.url)
+        .then(function(data){
+          alert(data.value)   
+        });
+      })
+    });  
+  console.log("Fine seconda");
+
+  var resultXXX2 = gett('remote/first.json')
+    .then(function(data){
+      console.log('data is now' + JSON.stringify(data));
+      gett(data.url)
+      .then(function(data){
+        console.log('data is now' + JSON.stringify(data));
+        gett(data.url)
+        .then(function(data){
+          val = data.value;
+          alert(data.value);
+        });
+      })
+    });      
+  console.log("Fine terza");    
 });
