@@ -1,6 +1,6 @@
 function testThirdValue(verdict){
   console.log("--------------testThirdValue------------------");
-  return verdict(baseMonad().value().data.value === "third_value");
+  verdict(baseMonad().value().data.value === "third_value");
 }
 
 JSC.claim('test third value', testThirdValue, []);
