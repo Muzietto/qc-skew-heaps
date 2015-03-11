@@ -1,24 +1,28 @@
 var COUNTER = 0;
 
 function XXX(verdict){
-  console.log('starting ' + COUNTER++);
-  var result = false;
-  setTimeout(function(){
-    result = true;
-  },Math.floor((Math.random() * 5000) + 5000));
-  
-  resultsChecker();
-  
-  function resultsChecker() {
+  return function(c){
+    var result = false;
+    var delay = Math.floor((Math.random() * 5000) + 5000);
+    console.log('starting ' + c + ' with delay ' + delay);
     setTimeout(function(){
-      if (!result) {
-        resultsChecker();
-      } else {
-        console.log('ending ' + --COUNTER);
-        verdict(true);
-      }
-    },0);
-  }
+      result = true;
+      console.log('awake ' + c);
+    }, delay);
+    
+    resultsChecker();
+    
+    function resultsChecker() {
+      setTimeout(function(){
+        if (!result) {
+          resultsChecker();
+        } else {
+          console.log('ending ' + c);
+          verdict(true);
+        }
+      }, 0);
+    }
+  }(COUNTER++);
 } 
 
 JSC.claim('XXX', XXX, []);
