@@ -1,19 +1,18 @@
+var casa;
 // ASYNC stuff
 var gett = function(url){
+  casa = null;
   console.log('invoking ' + url);
   return $.ajax({
     type: 'GET',
     url: url,
     contentType: 'text/plain',
-    headers: {
-      Origin: 'http://www.unimi.it'
-    },
     xhrFields: {
       withCredentials: false
     },
     success: function (data) {
       console.log('URL: ' + url);
-      return 'casa';
+      casa = 'casa';
     },
     error: function(error){console.log('FAIL: ' + JSON.stringify(error))}
   });
@@ -89,10 +88,11 @@ var getUrlFromChain = function(){
 }
 
 var baseMonad = function(){
-    return gett('http://www.unimi.it?r_id=' + (Math.random() * 1000))
-    .then(function(data){
-      console.log('data is now' + JSON.stringify(data));
-    });
+  console.log('chiamata a base monad');
+  return gett('http://fortawesome.github.io/Font-Awesome/assets/font-awesome/fonts/fontawesome-webfont.woff2?v=4.3.0&r_id=' + (Math.random() * 1000))
+  .then(function(data){
+    console.log('completed request');
+  });
 }
 
 $(document).ready(function(){

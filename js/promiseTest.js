@@ -1,13 +1,15 @@
 function testMonadValue(verdict){
   baseMonad()
-    .then(function(data){return verdict(data === 'casa')}, function(){return verdict(false)});
+    .then(function(data){return verdict(casa === 'casa')});
 }
 
 function testPromiseValue(verdict){
-    gett('http://www.unimi.it/?r_id=' + (Math.random() * 1000))
-    .then(function(data){
-      console.log('data is now' + JSON.stringify(data));
-    });  
+  console.log('chiamata a test promise value');
+  gett('http://fortawesome.github.io/Font-Awesome/assets/font-awesome/fonts/fontawesome-webfont.woff2?v=4.3.0&r_id=' + (Math.random() * 1000))
+  .then(function(data){
+    console.log('completed test request');
+    return verdict(true);
+  });  
 }
 
 JSC.claim('test monad value', testMonadValue, []);
