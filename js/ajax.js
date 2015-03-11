@@ -28,6 +28,7 @@ var get = function(url){
       dataType: 'json',
       type: 'GET',
       cache: true,
+      async: false,
       contentType: 'application/json',
       success: function (data) {
         console.log('URL: ' + url + '; SUCCESS: ' + data);

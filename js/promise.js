@@ -1,20 +1,23 @@
-function pauseComp(millis) {
-  var date = new Date(), curDate;
-  do { 
-    curDate = new Date(); 
-  } while(curDate-date < millis);
-}
-
 // ASYNC stuff
 var gett = function(url){
   console.log('invoking ' + url);
-  return $.getJSON(url, function (data) {
-      console.log('URL: ' + url + '; SUCCESS: ' + JSON.stringify(data));
-      data.filippo = 12;
-      return data;
-  })
-  .fail(function(error){console.log('FAIL: ' + error)});
-}
+  return $.ajax({
+    type: 'GET',
+    url: url,
+    contentType: 'text/plain',
+    headers: {
+      Origin: 'http://www.unimi.it'
+    },
+    xhrFields: {
+      withCredentials: false
+    },
+    success: function (data) {
+      console.log('URL: ' + url);
+      return 'casa';
+    },
+    error: function(error){console.log('FAIL: ' + JSON.stringify(error))}
+  });
+}  
 
 // SYNC stuff
 var getUrlFromData = function(v){
@@ -85,6 +88,13 @@ var getUrlFromChain = function(){
   }
 }
 
+var baseMonad = function(){
+    return gett('http://www.unimi.it?r_id=' + (Math.random() * 1000))
+    .then(function(data){
+      console.log('data is now' + JSON.stringify(data));
+    });
+}
+
 $(document).ready(function(){
   /*
   var result0 = ajax({ acc: 'START', data: {}});
@@ -101,7 +111,7 @@ $(document).ready(function(){
     .getUrl() // gets third.json
   ;
   alert(result10.value().acc);    
-  */
+  
   // promises --> callback hell
   var resultXXX = gett('remote/first.json')
     .then(function(data){
@@ -142,5 +152,6 @@ $(document).ready(function(){
         });
       })
     });      
-  console.log("Fine terza");    
+  console.log("Fine terza"); 
+  */
 });
