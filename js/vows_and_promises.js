@@ -1,4 +1,3 @@
-
 // the deferred
 var vow = VOW.make();
 
