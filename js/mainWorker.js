@@ -1,7 +1,12 @@
 if (!!window.Worker) {
-	var myWorker = new Worker("js/worker.js");
-  myWorker.postMessage(10);
-	myWorker.onmessage = function(e) {
-    console.log('Message received from worker: ' + e.data);
-	}
+  var myFirstWorker = new Worker("js/firstWorker.js");
+  myFirstWorker.postMessage(10);
+  myFirstWorker.onmessage = function(e) {
+    console.log('Message received from FIRST worker: ' + e.data);
+  }
+  var mySecondWorker = new Worker("js/secondWorker.js");
+  mySecondWorker.postMessage(10);
+  mySecondWorker.onmessage = function(e) {
+    console.log('Message received from SECOND worker: ' + e.data);
+  }
 }

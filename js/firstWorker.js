@@ -1,4 +1,5 @@
 importScripts('./lib/jscheck.js'); 
+
 var COUNTER = 0;
 function XXX(verdict){
   return function(c){
@@ -32,3 +33,4 @@ onmessage = function(e) {
   JSC.reps(e.data);
   JSC.check();
 }
+
