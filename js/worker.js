@@ -1,4 +1,5 @@
 importScripts('./lib/jscheck.js'); 
+JSC.on_report(function(str) {console.log(str)});
 
 var COUNTER = 0;
 function XXX(verdict){
