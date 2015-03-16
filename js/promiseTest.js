@@ -1,6 +1,6 @@
 function testMonadValue(verdict){
   baseMonad()
-    .then(function(data){return verdict(casa === 'casa')});
+    .then(function(data){verdict(casa === 'casa')});
 }
 
 function testPromiseValue(verdict){
@@ -8,7 +8,7 @@ function testPromiseValue(verdict){
   gett('http://fortawesome.github.io/Font-Awesome/assets/font-awesome/fonts/fontawesome-webfont.woff2?v=4.3.0&r_id=' + (Math.random() * 1000))
   .then(function(data){
     console.log('completed test request');
-    return verdict(true);
+    verdict(true);
   });  
 }
 

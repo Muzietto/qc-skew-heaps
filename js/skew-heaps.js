@@ -102,11 +102,3 @@ function flatten(tree){
     if (tree === null) return [];
     return [tree(label)].concat(flatten(tree(left)), flatten(tree(right)));
 }
-
-
-
-
-
-
-
-
