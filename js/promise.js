@@ -87,7 +87,7 @@ var getUrlFromChain = function(){
   }
 }
 
-var baseMonad = function(){
+var baseMonad = function(id){
   console.log('chiamata a base monad');
   return gett('http://fortawesome.github.io/Font-Awesome/assets/font-awesome/fonts/fontawesome-webfont.woff2?v=4.3.0&r_id=' + (Math.random() * 1000))
   .then(function(data){

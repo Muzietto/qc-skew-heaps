@@ -16,32 +16,36 @@ var getUrlFromData = function(v){
     error: function(error){console.log('ERR: ' + error)}
   })
   pauseComp(1000);
-  return { acc: v.acc + ' --> ' + url, data: jsonResult, jump: v.jump + 1 };
+  console.log('Ajax of test ID: ' + v.id + ', jump number: ' + v.jump);
+  return { acc: v.acc + ' --> ' + url, data: jsonResult, jump: (v.jump + 1), id: v.id};
 }
   
-var get = function(url){
+var get = function(url, id, jump){
   return function(v){
+    v.id = id;
+    v.jump = jump;
     var jsonResult = null;
     console.log('invoking ' + url);
-    $.ajax({
-      url: url,
-      dataType: 'json',
-      type: 'GET',
-      cache: true,
-      async: false,
-      contentType: 'application/json',
-      success: function (data) {
-        console.log('URL: ' + url + '; SUCCESS: ' + data);
-        jsonResult = data;
-      },
-      error: function(error){console.log('ERR: ' + error)}
-    })
-    pauseComp(1000);
-    return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult, jump: v.jump + 1 });
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'GET',
+        cache: true,
+        async: false,
+        contentType: 'application/json',
+        success: function (data) {
+          console.log('URL: ' + url + '; SUCCESS: ' + data);
+          jsonResult = data;
+        },
+        error: function(error){console.log('ERR: ' + error)}
+      })
+      pauseComp(1000);
+      console.log('Ajax of test ID: ' + v.id + ', jump number: ' + v.jump);
+    return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult, jump: (v.jump + 1), id: v.id});
   }
 }
 
-var navigate = function(url) {
+var navigate = function(url, id) {
   var result = ajax({ acc: 'START', data: {}, jump: 0}).bind(get(url));
   while('url' in Object.keys(result)){
     result = result.getUrl();
@@ -49,10 +53,10 @@ var navigate = function(url) {
   return result;
 }
 
-function baseMonad(){
-  return ajax({ acc: 'START', data: {}, jump: 0})
-    .bind(get('remote/first.json'))
-    .getUrl() // gets second.json
+function baseMonad(id){
+  return ajax({ acc: 'START', data: {}})
+    .bind(get('remote/first.json', id, 1))
+    .getUrl() // gets second.jsons
     .getUrl(); // gets third.json
 }
 

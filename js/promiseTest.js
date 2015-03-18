@@ -1,5 +1,7 @@
+var ID = 0;
+
 function testMonadValue(verdict){
-  baseMonad()
+  baseMonad(ID++)
     .then(function(data){verdict(casa === 'casa')});
 }
 
