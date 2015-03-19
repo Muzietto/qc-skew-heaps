@@ -1,13 +1,11 @@
-var ID = 1;
-
-//function testMonadValue(verdict){
-//  baseMonad(ID++)
-//  .then.(
-//  function(data){
-//    console.log("Dentro il then dell verdict");
-//    verdict(true);
-//  });
-//}
+function testMonadValue(verdict, id){
+  baseMonad(id)
+  .then(
+  function(data){
+    console.log("Dentro il then dell verdict ID: " + id);
+    verdict(true);
+  });
+}
 
 function testPromiseValue(verdict, id){
   console.log('ID: ' + id + ' JUMP: 1');
@@ -27,8 +25,8 @@ function testPromiseValue(verdict, id){
 }
 
 
-//JSC.claim('test monad value', testMonadValue, []);
-JSC.claim('test promise value', testPromiseValue, [JSC.sequence([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])]);
+JSC.claim('test monad value', testMonadValue, [JSC.sequence([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])]);
+JSC.claim('test promise value', testPromiseValue, [JSC.sequence([11, 12, 13, 14, 15, 16, 17, 18, 19, 20])]);
 
 $(document).ready(function(){
   JSC.reps(10);
