@@ -1,21 +1,34 @@
-var ID = 0;
+var ID = 1;
 
-function testMonadValue(verdict){
-  baseMonad(ID++)
-    .then(function(data){verdict(casa === 'casa')});
-}
+//function testMonadValue(verdict){
+//  baseMonad(ID++)
+//  .then.(
+//  function(data){
+//    console.log("Dentro il then dell verdict");
+//    verdict(true);
+//  });
+//}
 
-function testPromiseValue(verdict){
-  console.log('chiamata a test promise value');
-  gett('http://fortawesome.github.io/Font-Awesome/assets/font-awesome/fonts/fontawesome-webfont.woff2?v=4.3.0&r_id=' + (Math.random() * 1000))
+function testPromiseValue(verdict, id){
+  console.log('ID: ' + id + ' JUMP: 1');
+  return gett('remote/first.json')
   .then(function(data){
-    console.log('completed test request');
-    verdict(true);
-  });  
+    console.log('ID: ' + id + ' JUMP: 2');
+    gett(data.url)
+    .then(function(data){
+      console.log('ID: ' + id + ' JUMP: 3');
+      gett(data.url)
+      .then(function(data){
+        console.log('End Of ID: ' + id);
+        verdict(true);
+      });
+    });
+  });
 }
 
-JSC.claim('test monad value', testMonadValue, []);
-JSC.claim('test promise value', testPromiseValue, []);
+
+//JSC.claim('test monad value', testMonadValue, []);
+JSC.claim('test promise value', testPromiseValue, [JSC.sequence([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])]);
 
 $(document).ready(function(){
   JSC.reps(10);

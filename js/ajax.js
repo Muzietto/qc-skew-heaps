@@ -15,7 +15,6 @@ var getUrlFromData = function(v){
     },
     error: function(error){console.log('ERR: ' + error)}
   })
-  pauseComp(1000);
   console.log('Ajax of test ID: ' + v.id + ', jump number: ' + v.jump);
   return { acc: v.acc + ' --> ' + url, data: jsonResult, jump: (v.jump + 1), id: v.id};
 }
@@ -39,7 +38,6 @@ var get = function(url, id, jump){
         },
         error: function(error){console.log('ERR: ' + error)}
       })
-      pauseComp(1000);
       console.log('Ajax of test ID: ' + v.id + ', jump number: ' + v.jump);
     return ajax({ acc: v.acc + ' --> ' + url, data: jsonResult, jump: (v.jump + 1), id: v.id});
   }
