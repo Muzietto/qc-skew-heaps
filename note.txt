@@ -1,0 +1,4 @@
+setTimeout impostato a 0 viene considderato di priorità maggiore, quindi il setTimeout della chiamata
+ad generate_report viene messa in coda dietro alla chiamate dei test, ma alla fine dell'ultimo
+test il timer del generate_report viene ripulita, e quindi non viene mai eseguito.
+

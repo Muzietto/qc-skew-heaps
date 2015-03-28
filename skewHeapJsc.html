@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <title>JSC skew heaps</title>
+        <link rel="stylesheet" type="text/css" href="js/lib/mocha.css">
+
+        <script type="text/javascript" src="js/lib/jscheck.js"></script>
+        <script type="text/javascript" src="http://jtemplates.tpython.com/jTemplates/jquery-jtemplates.js"></script>
+        <script type="text/javascript" src="js/JSCsetup.js"></script>
+        <script type="text/javascript" src="js/skew-heaps.js"></script>
+        <script type="text/javascript" src="js/skew-heaps_jscheck.js"></script>
+
+        <style>
+          #jTemplates {
+            width:500px;
+            margin:0 auto;
+            background-color:#EEEEEE;
+            min-height:800px;
+          }
+          table{
+            width: 100%;
+            border:1px solid #000;
+            border-collapse: collapse;
+          }
+          .err{
+            margin-top: 50px;
+          }
+          td, tr{
+            border:1px solid #000;
+          }
+          .int{
+          font-weight: bold;
+          
+          }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin-left:20px;">JSC skew heaps test</h1>
+        
+        
+        <div id="jTemplates"></div>
+        
+        <script type="text/html" id="sampleTemplate">
+          <div class="template">
+            <table>
+              <tr class="int">
+                <td style="width:70%">Test name</td>
+                <td style="width:10%">Pass</td>
+                <td style="width:10%">Fail</td>
+                <td style="width:10%">Lost</td>
+              </tr>
+              {#foreach $T.acc as case}
+              <tr {#if $T.case.fail > 0} style="background-color:red;" {#else} style="background-color:green;" {#/if}>
+                <td>{$T.case.name}</td>
+                <td>{$T.case.pass}</td>
+                <td>{$T.case.fail}</td>
+                <td>{$T.case.lost}</td>
+              </tr>
+              {#/for}
+            </table>
+            <table class="err">
+              <tr class="int">
+                <td style="width:45%">Test name</td>
+                <td style="width:10%">Serial</td>
+                <td style="width:45%">LostMsg</td>
+              </tr>
+              {#foreach $T.acc as case}
+                {#foreach $T.case.errorMessages as error}
+                <tr>
+                  <td>{$T.case.name}</td>
+                  <td>{$T.error.serial}</td>
+                  <td>{$T.error.msg}</td>
+                </tr>
+                {#/for}
+            {#/for}
+            </table>
+            <table class="err">
+              <tr class="int">
+                <td style="width:45%">Test name</td>
+                <td style="width:10%">Serial</td>
+                <td style="width:45%">ErrorInput</td>
+              </tr>
+              {#foreach $T.acc as case}
+                {#foreach $T.case.errorInputs as wrong}
+                <tr>
+                  <td>{$T.case.name}</td>
+                  <td>{$T.wrong.serial}</td>
+                  <td>{$T.wrong.input}</td>
+                </tr>
+                {#/for}
+            {#/for}
+            </table>
+          </div>
+        </script>
+    </body>
+</html> 
